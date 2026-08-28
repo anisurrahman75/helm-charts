@@ -220,6 +220,9 @@ The following table shows the configurable parameters of the OpenEverest chart a
 | pmm.enabled | bool | `false` | If set, deploys PMM2 in the release namespace. |
 | pmm3.enabled | bool | `false` | If set, deploys PMM3 in the release namespace. |
 | pmm3.pmm | object | `{"nameOverride":"pmm3"}` | PMM configuration. All PMM chart values go under this key. |
+| proxy.httpProxy | string | `""` | HTTP proxy URL. Injected as HTTP_PROXY into the Everest server and operator containers, the upgrade-checks hook job, and (via `everest-db-namespace`) the PXC/PSMDB/PG operator Subscriptions. |
+| proxy.httpsProxy | string | `""` | HTTPS proxy URL. Injected as HTTPS_PROXY into the same set of workloads. |
+| proxy.noProxy | string | `""` | Comma-separated list of hosts to exclude from proxying. Injected as NO_PROXY into the same set of workloads. The upgrade-checks hook also calls kubectl (via `everestctl upgrade --in-cluster`) against the in-cluster API server, so include its address/CIDR here if it would otherwise be proxied. |
 | server.affinity | object | `{}` | Affinity settings for the server pod. |
 | server.apiRequestsRateLimit | int | `100` | Set the allowed number of requests per second. |
 | server.env | list | `[]` | Additional environment variables to pass to the server deployment. |
